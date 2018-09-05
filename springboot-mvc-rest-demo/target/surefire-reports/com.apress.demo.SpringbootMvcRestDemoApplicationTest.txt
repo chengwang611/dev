@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: com.apress.demo.SpringbootMvcRestDemoApplicationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.537 s <<< FAILURE! - in com.apress.demo.SpringbootMvcRestDemoApplicationTest
+initializationError(com.apress.demo.SpringbootMvcRestDemoApplicationTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.IllegalStateException: Found multiple @SpringBootConfiguration annotated classes [Generic bean: class [com.apress.demo.ElasticSearchStarter]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [C:\Users\chenwang2017\workspace\springboot-mvc-rest-demo\target\classes\com\apress\demo\ElasticSearchStarter.class], Generic bean: class [com.apress.demo.SpringbootMvcRestDemoApplication]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [C:\Users\chenwang2017\workspace\springboot-mvc-rest-demo\target\classes\com\apress\demo\SpringbootMvcRestDemoApplication.class]]
+

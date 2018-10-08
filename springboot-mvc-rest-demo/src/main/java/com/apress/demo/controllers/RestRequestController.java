@@ -79,8 +79,8 @@ public class RestRequestController {
    * @return
    */
   @GetMapping("/api/searchSrcFilters")
-  public List<JsonNode> searchSrcFilters(@RequestParam("query") String query,@RequestParam("includeFields")String[]includeFields,@RequestParam("excludeFields")String[]excludeFields, int from,int size ) {
-      return dao.wildcardQueryFields(query, includeFields, excludeFields, from, size);
+  public List<JsonNode> searchSrcFilters(@RequestParam("indexs")String[] indexs,@RequestParam("query") String query,@RequestParam("includeFields")String[]includeFields,@RequestParam("excludeFields")String[]excludeFields, int from,int size ) {
+      return dao.wildcardQueryFields(query, indexs,includeFields, excludeFields, from, size);
   }
     
     

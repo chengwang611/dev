@@ -150,7 +150,7 @@ public class QueryDAO {
    * @param query
    * @return
    */
-  public List<JsonNode> wildcardQueryFields(String query,String[] includeFields,String[] excludeFields,int from, int size){
+  public List<JsonNode> wildcardQueryFields(String query,String[] indexs,String[] includeFields,String[] excludeFields,int from, int size){
 
       List<JsonNode> result = new ArrayList<>();
 
@@ -158,7 +158,7 @@ public class QueryDAO {
     	  
     	  
     	  
-          result = getDocumentsStr(QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*"),includeFields,excludeFields,from,size);
+          result = getDocumentsStr(QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*"),indexs,includeFields,excludeFields,from,size);
       } catch (Exception ex){
           //log.error("The exception was thrown in wildcardQuery method. {} ", ex);
       }
@@ -195,6 +195,19 @@ public class QueryDAO {
         searchRequest.source(sourceBuilder);
         return searchRequest;
     }
+    
+    /**
+    *
+    * @return
+    */
+   private SearchRequest getSearchRequest(String[] indexs){
+       //SearchRequest searchRequest = new SearchRequest(props.getIndex().getName());
+   	
+       SearchRequest searchRequest = new SearchRequest(indexs);
+       searchRequest.source(sourceBuilder);
+       return searchRequest;
+   }
+    
 
     /**
      *
@@ -253,7 +266,7 @@ public class QueryDAO {
     * @return
     * @throws IOException
     */
-	private List<JsonNode> getDocumentsStr(AbstractQueryBuilder builder,String[] includeFields ,String[] excludeFields,int from,int size)
+	private List<JsonNode> getDocumentsStr(AbstractQueryBuilder builder,String[] indexs,String[] includeFields ,String[] excludeFields,int from,int size)
 			throws IOException {
 		List<JsonNode> result = new ArrayList<>();
 
@@ -262,7 +275,7 @@ public class QueryDAO {
 		sourceBuilder.from(from);
 		sourceBuilder.size(size);
 		
-		SearchRequest searchRequest = getSearchRequest();
+		SearchRequest searchRequest = getSearchRequest(indexs);
 
 		SearchResponse searchResponse = client.search(searchRequest);
 		SearchHits hits = searchResponse.getHits();

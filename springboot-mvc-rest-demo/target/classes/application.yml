@@ -11,7 +11,7 @@ app:
     credentialUsername: elastic
     credentialPassword: changeme
   index:
-    name: ga_day_index-0907
+    name: ga_day_index-0907,ga_day_index-0908
     type: ga_index_type
     shard: 2
     replica: 1

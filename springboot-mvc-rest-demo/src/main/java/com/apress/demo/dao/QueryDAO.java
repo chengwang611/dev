@@ -63,7 +63,7 @@ public class QueryDAO {
             IndexResponse response = client.index(request);
             return response.getId();
         } catch (Exception ex) {
-           // log.error("The exception was thrown in createIndex method. {} ", ex);
+//            log.error("The exception was thrown in createIndex method. {} ", ex);
         }
 
         return null;
@@ -144,6 +144,31 @@ public class QueryDAO {
        return result;
    }
 
+   
+   /**
+   *
+   * @param query
+   * @return
+   */
+  public List<JsonNode> wildcardQueryFields(String query,String[] includeFields,String[] excludeFields,int from, int size){
+
+      List<JsonNode> result = new ArrayList<>();
+
+      try {
+    	  
+    	  
+    	  
+          result = getDocumentsStr(QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*"),includeFields,excludeFields,from,size);
+      } catch (Exception ex){
+          //log.error("The exception was thrown in wildcardQuery method. {} ", ex);
+      }
+
+      return result;
+  }
+   
+   
+   
+   
 
     /**
      *
@@ -164,7 +189,9 @@ public class QueryDAO {
      * @return
      */
     private SearchRequest getSearchRequest(){
-        SearchRequest searchRequest = new SearchRequest(props.getIndex().getName());
+        //SearchRequest searchRequest = new SearchRequest(props.getIndex().getName());
+    	String[] indexs=props.getIndex().getName().split(",");
+        SearchRequest searchRequest = new SearchRequest(indexs);
         searchRequest.source(sourceBuilder);
         return searchRequest;
     }
@@ -209,9 +236,7 @@ public class QueryDAO {
 		SearchHits hits = searchResponse.getHits();
 		SearchHit[] searchHits = hits.getHits();
 		for (SearchHit hit : searchHits) {
-			// Document doc = gson.fromJson(hit.getSourceAsString(),
-			// Document.class);
-			// doc.setId(hit.getId());
+
 			ObjectMapper mapper = new ObjectMapper();
 			JsonNode actualObj = mapper.readTree(hit.getSourceAsString());
 
@@ -221,6 +246,46 @@ public class QueryDAO {
 
 		return result;
 	}
+	
+    /**
+    *
+    * @param builder
+    * @return
+    * @throws IOException
+    */
+	private List<JsonNode> getDocumentsStr(AbstractQueryBuilder builder,String[] includeFields ,String[] excludeFields,int from,int size)
+			throws IOException {
+		List<JsonNode> result = new ArrayList<>();
+
+		sourceBuilder.query(builder);
+		sourceBuilder.fetchSource(includeFields, excludeFields);
+		sourceBuilder.from(from);
+		sourceBuilder.size(size);
+		
+		SearchRequest searchRequest = getSearchRequest();
+
+		SearchResponse searchResponse = client.search(searchRequest);
+		SearchHits hits = searchResponse.getHits();
+		SearchHit[] searchHits = hits.getHits();
+		for (SearchHit hit : searchHits) {
+
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode actualObj = mapper.readTree(hit.getSourceAsString());
+
+			result.add(actualObj);
+
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
     public void flush() throws IOException {
         String endPoint = String.join("/", props.getIndex().getName(), "_flush");

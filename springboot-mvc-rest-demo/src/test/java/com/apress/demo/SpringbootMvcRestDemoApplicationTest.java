@@ -80,7 +80,7 @@ public class SpringbootMvcRestDemoApplicationTest
         assertNotNull(updatedPost);
 	}
 	
-	@Test
+	//@Test
 	public void testDeletePost() 
 	{
 		int id = 2;

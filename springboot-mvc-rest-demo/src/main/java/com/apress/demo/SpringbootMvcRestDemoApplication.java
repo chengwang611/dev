@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Siva
  *
  */
-
-@SpringBootApplication
+//@SpringBootApplication
 public class SpringbootMvcRestDemoApplication
 {
 

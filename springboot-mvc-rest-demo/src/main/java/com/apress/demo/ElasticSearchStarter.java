@@ -29,6 +29,7 @@ public class ElasticSearchStarter implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(ElasticSearchStarter.class);
+        System.setProperty("server.servlet.context-path", "/dna/service");
         app.run();
     }
 

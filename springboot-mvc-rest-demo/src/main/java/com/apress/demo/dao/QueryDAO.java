@@ -5,6 +5,8 @@ package com.apress.demo.dao;
 
 import com.apress.demo.config.ConfigProps;
 import com.apress.demo.entities.Document;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
@@ -123,6 +125,25 @@ public class QueryDAO {
 
         return result;
     }
+    
+    /**
+    *
+    * @param query
+    * @return
+    */
+   public List<JsonNode> wildcardQueryStr(String query){
+
+       List<JsonNode> result = new ArrayList<>();
+
+       try {
+           result = getDocumentsStr(QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*"));
+       } catch (Exception ex){
+           //log.error("The exception was thrown in wildcardQuery method. {} ", ex);
+       }
+
+       return result;
+   }
+
 
     /**
      *
@@ -171,6 +192,35 @@ public class QueryDAO {
 
         return result;
     }
+    /**
+    *
+    * @param builder
+    * @return
+    * @throws IOException
+    */
+	private List<JsonNode> getDocumentsStr(AbstractQueryBuilder builder)
+			throws IOException {
+		List<JsonNode> result = new ArrayList<>();
+
+		sourceBuilder.query(builder);
+		SearchRequest searchRequest = getSearchRequest();
+
+		SearchResponse searchResponse = client.search(searchRequest);
+		SearchHits hits = searchResponse.getHits();
+		SearchHit[] searchHits = hits.getHits();
+		for (SearchHit hit : searchHits) {
+			// Document doc = gson.fromJson(hit.getSourceAsString(),
+			// Document.class);
+			// doc.setId(hit.getId());
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode actualObj = mapper.readTree(hit.getSourceAsString());
+
+			result.add(actualObj);
+
+		}
+
+		return result;
+	}
 
     public void flush() throws IOException {
         String endPoint = String.join("/", props.getIndex().getName(), "_flush");

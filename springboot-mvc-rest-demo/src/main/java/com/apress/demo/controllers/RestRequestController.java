@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.apress.demo.dao.QueryDAO;
 import com.apress.demo.entities.Document;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.List;
 
@@ -61,4 +62,20 @@ public class RestRequestController {
     public List<Document> search(@RequestParam("query") String query) {
         return dao.wildcardQuery(query);
     }
+    
+    /**
+    *
+    * @param query
+    * @return
+    */
+   @GetMapping("/api/searchStr")
+   public List<JsonNode> searchStr(@RequestParam("query") String query) {
+       return dao.wildcardQueryStr(query);
+   }
+    
+    
+    
 }
+
+
+

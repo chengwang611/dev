@@ -1,0 +1,849 @@
+Using username "root".
+root@192.168.37.128's password:
+Last login: Sat Dec 14 09:19:45 2019 from 192.168.37.1
+[root@sandbox ~]# cd /home/spark
+[root@sandbox spark]# export SPARK_MAJOR_VERSION=2
+[root@sandbox spark]# spark-shell
+SPARK_MAJOR_VERSION is set to 2, using Spark2
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve                                                                       l(newLevel).
+19/12/14 09:27:38 WARN AbstractLifeCycle: FAILED ServerConnector@7d42404e{HTTP/1.1}{0.0.0.0:4040}: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+        at sun.nio.ch.Net.bind0(Native Method)
+        at sun.nio.ch.Net.bind(Net.java:433)
+        at sun.nio.ch.Net.bind(Net.java:425)
+        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+        at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+        at org.spark_project.jetty.server.ServerConnector.open(ServerConnector.java:321)
+        at org.spark_project.jetty.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80)
+        at org.spark_project.jetty.server.ServerConnector.doStart(ServerConnector.java:236)
+        at org.spark_project.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+        at org.apache.spark.ui.JettyUtils$.org$apache$spark$ui$JettyUtils$$newConnector$1(JettyUtils.scala:321)
+        at org.apache.spark.ui.JettyUtils$.org$apache$spark$ui$JettyUtils$$httpConnect$1(JettyUtils.scala:353)
+        at org.apache.spark.ui.JettyUtils$$anonfun$7.apply(JettyUtils.scala:356)
+        at org.apache.spark.ui.JettyUtils$$anonfun$7.apply(JettyUtils.scala:356)
+        at org.apache.spark.util.Utils$$anonfun$startServiceOnPort$1.apply$mcVI$sp(Utils.scala:2220)
+        at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:160)
+        at org.apache.spark.util.Utils$.startServiceOnPort(Utils.scala:2212)
+        at org.apache.spark.ui.JettyUtils$.startJettyServer(JettyUtils.scala:356)
+        at org.apache.spark.ui.WebUI.bind(WebUI.scala:130)
+        at org.apache.spark.SparkContext$$anonfun$10.apply(SparkContext.scala:460)
+        at org.apache.spark.SparkContext$$anonfun$10.apply(SparkContext.scala:460)
+        at scala.Option.foreach(Option.scala:257)
+        at org.apache.spark.SparkContext.<init>(SparkContext.scala:460)
+        at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2320)
+        at org.apache.spark.sql.SparkSession$Builder$$anonfun$6.apply(SparkSession.scala:868)
+        at org.apache.spark.sql.SparkSession$Builder$$anonfun$6.apply(SparkSession.scala:860)
+        at scala.Option.getOrElse(Option.scala:121)
+        at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:860)
+        at org.apache.spark.repl.Main$.createSparkSession(Main.scala:96)
+        at $line3.$read$$iw$$iw.<init>(<console>:15)
+        at $line3.$read$$iw.<init>(<console>:42)
+        at $line3.$read.<init>(<console>:44)
+        at $line3.$read$.<init>(<console>:48)
+        at $line3.$read$.<clinit>(<console>)
+        at $line3.$eval$.$print$lzycompute(<console>:7)
+        at $line3.$eval$.$print(<console>:6)
+        at $line3.$eval.$print(<console>)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at scala.tools.nsc.interpreter.IMain$ReadEvalPrint.call(IMain.scala:786)
+        at scala.tools.nsc.interpreter.IMain$Request.loadAndRun(IMain.scala:1047)
+        at scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:638)
+        at scala.tools.nsc.interpreter.IMain$WrappedRequest$$anonfun$loadAndRunReq$1.apply(IMain.scala:637)
+        at scala.reflect.internal.util.ScalaClassLoader$class.asContext(ScalaClassLoader.scala:31)
+        at scala.reflect.internal.util.AbstractFileClassLoader.asContext(AbstractFileClassLoader.scala:19)
+        at scala.tools.nsc.interpreter.IMain$WrappedRequest.loadAndRunReq(IMain.scala:637)
+        at scala.tools.nsc.interpreter.IMain.interpret(IMain.scala:569)
+        at scala.tools.nsc.interpreter.IMain.interpret(IMain.scala:565)
+        at scala.tools.nsc.interpreter.ILoop.interpretStartingWith(ILoop.scala:807)
+        at scala.tools.nsc.interpreter.ILoop.command(ILoop.scala:681)
+        at scala.tools.nsc.interpreter.ILoop.processLine(ILoop.scala:395)
+        at org.apache.spark.repl.SparkILoop$$anonfun$initializeSpark$1.apply$mcV$sp(SparkILoop.scala:38)
+        at org.apache.spark.repl.SparkILoop$$anonfun$initializeSpark$1.apply(SparkILoop.scala:37)
+        at org.apache.spark.repl.SparkILoop$$anonfun$initializeSpark$1.apply(SparkILoop.scala:37)
+        at scala.tools.nsc.interpreter.IMain.beQuietDuring(IMain.scala:214)
+        at org.apache.spark.repl.SparkILoop.initializeSpark(SparkILoop.scala:37)
+        at org.apache.spark.repl.SparkILoop.loadFiles(SparkILoop.scala:105)
+        at scala.tools.nsc.interpreter.ILoop$$anonfun$process$1.apply$mcZ$sp(ILoop.scala:920)
+        at scala.tools.nsc.interpreter.ILoop$$anonfun$process$1.apply(ILoop.scala:909)
+        at scala.tools.nsc.interpreter.ILoop$$anonfun$process$1.apply(ILoop.scala:909)
+        at scala.reflect.internal.util.ScalaClassLoader$.savingContextLoader(ScalaClassLoader.scala:97)
+        at scala.tools.nsc.interpreter.ILoop.process(ILoop.scala:909)
+        at org.apache.spark.repl.Main$.doMain(Main.scala:69)
+        at org.apache.spark.repl.Main$.main(Main.scala:52)
+        at org.apache.spark.repl.Main.main(Main.scala)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:498)
+        at org.apache.spark.deploy.SparkSubmit$.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:745)
+        at org.apache.spark.deploy.SparkSubmit$.doRunMain$1(SparkSubmit.scala:187)
+        at org.apache.spark.deploy.SparkSubmit$.submit(SparkSubmit.scala:212)
+        at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:126)
+        at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+19/12/14 09:27:38 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+Spark context Web UI available at http://172.17.0.2:4041
+Spark context available as 'sc' (master = local[*], app id = local-1576315658435).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.1.0.2.6.0.3-8
+      /_/
+
+Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_131)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> spark.sql("show databases")
+res0: org.apache.spark.sql.DataFrame = [databaseName: string]
+
+scala> spark.sql("show databases").show
++--------------------+
+|        databaseName|
++--------------------+
+|             default|
+|            foodmart|
+|tpcds_bin_partiti...|
+|        tpcds_text_5|
+|     tpch_flat_orc_2|
+|         tpch_text_2|
+|                 udf|
+|              xademo|
++--------------------+
+
+
+scala> describe foodmart;
+<console>:24: error: not found: value describe
+       describe foodmart;
+       ^
+
+scala> spark.sql("describe foodmart").show
+org.apache.spark.sql.catalyst.analysis.NoSuchTableException: Table or view 'foodmart' not found in database 'default';
+  at org.apache.spark.sql.catalyst.catalog.SessionCatalog.requireTableExists(SessionCatalog.scala:138)
+  at org.apache.spark.sql.catalyst.catalog.SessionCatalog.getTableMetadata(SessionCatalog.scala:289)
+  at org.apache.spark.sql.execution.command.DescribeTableCommand.run(tables.scala:437)
+  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:58)
+  at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:56)
+  at org.apache.spark.sql.execution.command.ExecutedCommandExec.doExecute(commands.scala:74)
+  at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:114)
+  at org.apache.spark.sql.execution.SparkPlan$$anonfun$execute$1.apply(SparkPlan.scala:114)
+  at org.apache.spark.sql.execution.SparkPlan$$anonfun$executeQuery$1.apply(SparkPlan.scala:135)
+  at org.apache.spark.rdd.RDDOperationScope$.withScope(RDDOperationScope.scala:151)
+  at org.apache.spark.sql.execution.SparkPlan.executeQuery(SparkPlan.scala:132)
+  at org.apache.spark.sql.execution.SparkPlan.execute(SparkPlan.scala:113)
+  at org.apache.spark.sql.execution.QueryExecution.toRdd$lzycompute(QueryExecution.scala:92)
+  at org.apache.spark.sql.execution.QueryExecution.toRdd(QueryExecution.scala:92)
+  at org.apache.spark.sql.Dataset.<init>(Dataset.scala:185)
+  at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:64)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("show tables foodmart").show
+org.apache.spark.sql.catalyst.parser.ParseException:
+extraneous input 'foodmart' expecting <EOF>(line 1, pos 12)
+
+== SQL ==
+show tables foodmart
+------------^^^
+
+  at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:197)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:99)
+  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:45)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:53)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("use  foodmart")
+res5: org.apache.spark.sql.DataFrame = []
+
+scala> spark.sql("show tables")
+res6: org.apache.spark.sql.DataFrame = [database: string, tableName: string ... 1 more field]
+
+scala> spark.sql("show tables").show
++--------+-------------------+-----------+
+|database|          tableName|isTemporary|
++--------+-------------------+-----------+
+|foodmart|           customer|      false|
+|foodmart|inventory_fact_1998|      false|
+|foodmart|            product|      false|
+|foodmart|sales_fact_dec_1998|      false|
+|foodmart|              store|      false|
++--------+-------------------+-----------+
+
+
+scala> spark.sql("describe inventory_fact_1998").show
++---------------+-------------+-------+
+|       col_name|    data_type|comment|
++---------------+-------------+-------+
+|     product_id|          int|   null|
+|        time_id|          int|   null|
+|   warehouse_id|          int|   null|
+|       store_id|          int|   null|
+|  units_ordered|          int|   null|
+|  units_shipped|          int|   null|
+|warehouse_sales|decimal(10,4)|   null|
+| warehouse_cost|decimal(10,4)|   null|
+|    supply_time|     smallint|   null|
+|  store_invoice|decimal(10,4)|   null|
++---------------+-------------+-------+
+
+
+scala> spark.sql("sales_fact_dec_1998").show
+org.apache.spark.sql.catalyst.parser.ParseException:
+mismatched input 'sales_fact_dec_1998' expecting {'(', 'SELECT', 'FROM', 'ADD', 'DESC', 'WITH', 'VALUES', 'CREATE', 'TABLE', 'INSERT', 'DELETE', 'DESCRIBE', 'EXPLAIN', 'SHOW', 'USE', 'DROP', 'ALTER', 'MAP', 'SET', 'RESET', 'START', 'COMMIT', 'ROLLBACK', 'REDUCE', 'REFRESH', 'CLEAR', 'CACHE', 'UNCACHE', 'DFS', 'TRUNCATE', 'ANALYZE', 'LIST', 'REVOKE', 'GRANT', 'LOCK', 'UNLOCK', 'MSCK', 'EXPORT', 'IMPORT', 'LOAD'}(line 1, pos 0)
+
+== SQL ==
+sales_fact_dec_1998
+^^^
+
+  at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:197)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:99)
+  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:45)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:53)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("describe sales_fact_dec_1998").show
++------------+-------------+-------+
+|    col_name|    data_type|comment|
++------------+-------------+-------+
+|  product_id|          int|   null|
+|     time_id|          int|   null|
+| customer_id|          int|   null|
+|promotion_id|          int|   null|
+|    store_id|          int|   null|
+| store_sales|decimal(10,4)|   null|
+|  store_cost|decimal(10,4)|   null|
+|  unit_sales|decimal(10,4)|   null|
++------------+-------------+-------+
+
+
+scala> spark.sql("select * from customer c letf join  sales_fact_dec_1998 s on c.customer_id=s.customer_id ").show
+org.apache.spark.sql.catalyst.parser.ParseException:
+extraneous input 'letf' expecting {<EOF>, ',', 'WHERE', 'GROUP', 'ORDER', 'HAVING', 'LIMIT', 'JOIN', 'CROSS', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'NATURAL', 'LATERAL', 'WINDOW', 'UNION', 'EXCEPT', 'MINUS', 'INTERSECT', 'SORT', 'CLUSTER', 'DISTRIBUTE', 'ANTI'}(line 1, pos 25)
+
+== SQL ==
+select * from customer c letf join  sales_fact_dec_1998 s on c.customer_id=s.customer_id
+-------------------------^^^
+
+  at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:197)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:99)
+  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:45)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:53)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("select * from customer c left join  sales_fact_dec_1998 s on c.customer_id=s.customer_id ").show
+19/12/14 09:35:35 WARN Utils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.debug.maxToStringFields' in SparkEnv.conf.
++-----------+-----------+---------+-------+---+-------------------+--------+--------+--------+--------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+---------------+----------+-------+-----------+------------+--------+-----------+----------+----------+
+|customer_id|account_num|    lname|  fname| mi|           address1|address2|address3|address4|    city|state_province|postal_code|country|customer_region_id|      phone1|      phone2| birthdate|marital_status|yearly_income|gender|total_children|num_children_at_home|          education|date_accnt_opened|member_card|    occupation|houseowner|num_cars_owned|       fullname|product_id|time_id|customer_id|promotion_id|store_id|store_sales|store_cost|unit_sales|
++-----------+-----------+---------+-------+---+-------------------+--------+--------+--------+--------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+---------------+----------+-------+-----------+------------+--------+-----------+----------+----------+
+|          1|87462024688|   Nowmer|  Sheri| A.|   2433 Bailey Road|        |        |        |Tlaxiaco|        Oaxaca|      15057| Mexico|                30|271-555-9715|119-555-1969|1961-08-26|             M|  $30K - $50K|     F|             4|                   2|Partial High School|       1991-09-10|     Bronze|Skilled Manual|         Y|             4|   Sheri Nowmer|      null|   null|       null|        null|    null|       null|      null|      null|
+|          2|87470586299|  Whelply|Derrick| I.| 2219 Dewing Avenue|        |        |        |   Sooke|            BC|      17172| Canada|               101|211-555-7669|807-555-9033|1915-07-03|             S|  $70K - $90K|     M|             1|                   0|Partial High School|       1993-03-11|     Bronze|  Professional|         N|             3|Derrick Whelply|      null|   null|       null|        null|    null|       null|      null|      null|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       670|    838|          3|           0|      15|     5.3700|    1.7184|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       680|    838|          3|           0|      15|     2.9400|    1.2348|    2.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|      1196|    838|          3|           0|      15|     8.7600|    2.8908|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       886|    838|          3|           0|      15|     6.2200|    1.8660|    2.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       470|    838|          3|           0|      15|     8.7000|    2.9580|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       747|    838|          3|           0|      15|     5.4900|    2.5803|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       672|    819|          3|           0|      15|    10.0200|    3.3066|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       803|    819|          3|           0|      15|    10.5300|    4.2120|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       986|    819|          3|           0|      15|    10.5000|    3.4650|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|      1063|    819|          3|           0|      15|     9.5400|    4.5792|    3.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|      1418|    819|          3|           0|      15|     6.4400|    3.1556|    4.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|      1056|    819|          3|           0|      15|    11.7200|    4.2192|    4.0000|
+|          3|87475757600|    Derry| Jeanne|   |    7640 First Ave.|        |        |        |Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|   Jeanne Derry|       520|    819|          3|           0|      15|     8.4000|    3.6960|    3.0000|
+|          4|87500482201|   Spence|Michael| J.|      337 Tosca Way|        |        |        | Burnaby|            BC|      74674| Canada|                92|929-555-7279|272-555-2844|1969-06-20|             M|  $10K - $30K|     M|             4|                   4|Partial High School|       1994-05-21|     Normal|Skilled Manual|         N|             2| Michael Spence|      null|   null|       null|        null|    null|       null|      null|      null|
+|          5|87514054179|Gutierrez|   Maya|   |    8668 Via Neruda|        |        |        |  Novato|            CA|      57355|    USA|                42|387-555-7172|260-555-6936|1951-05-10|             S|  $30K - $50K|     F|             3|                   0|    Partial College|       1992-08-21|     Silver|        Manual|         N|             3| Maya Gutierrez|      null|   null|       null|        null|    null|       null|      null|      null|
+|          6|87517782449|  Damstra| Robert| F.|1619 Stillman Court|        |        |        |Lynnwood|            WA|      90792|    USA|                75|922-555-5465|333-555-5915|1942-10-08|             S|  $70K - $90K|     F|             3|                   0|   Bachelors Degree|       1992-04-05|     Bronze|  Professional|         Y|             3| Robert Damstra|       391|    907|          6|           0|      15|     2.6200|    0.9956|    2.0000|
+|          6|87517782449|  Damstra| Robert| F.|1619 Stillman Court|        |        |        |Lynnwood|            WA|      90792|    USA|                75|922-555-5465|333-555-5915|1942-10-08|             S|  $70K - $90K|     F|             3|                   0|   Bachelors Degree|       1992-04-05|     Bronze|  Professional|         Y|             3| Robert Damstra|      1506|    907|          6|           0|      15|    13.7200|    5.8996|    4.0000|
+|          6|87517782449|  Damstra| Robert| F.|1619 Stillman Court|        |        |        |Lynnwood|            WA|      90792|    USA|                75|922-555-5465|333-555-5915|1942-10-08|             S|  $70K - $90K|     F|             3|                   0|   Bachelors Degree|       1992-04-05|     Bronze|  Professional|         Y|             3| Robert Damstra|       997|    907|          6|           0|      15|    13.1600|    4.4744|    4.0000|
++-----------+-----------+---------+-------+---+-------------------+--------+--------+--------+--------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+---------------+----------+-------+-----------+------------+--------+-----------+----------+----------+
+only showing top 20 rows
+
+
+scala> spark.sql("select * from customer  ").show
++-----------+-----------+---------+--------+---+--------------------+--------+--------+--------+-------------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+-----------------+
+|customer_id|account_num|    lname|   fname| mi|            address1|address2|address3|address4|         city|state_province|postal_code|country|customer_region_id|      phone1|      phone2| birthdate|marital_status|yearly_income|gender|total_children|num_children_at_home|          education|date_accnt_opened|member_card|    occupation|houseowner|num_cars_owned|         fullname|
++-----------+-----------+---------+--------+---+--------------------+--------+--------+--------+-------------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+-----------------+
+|          1|87462024688|   Nowmer|   Sheri| A.|    2433 Bailey Road|        |        |        |     Tlaxiaco|        Oaxaca|      15057| Mexico|                30|271-555-9715|119-555-1969|1961-08-26|             M|  $30K - $50K|     F|             4|                   2|Partial High School|       1991-09-10|     Bronze|Skilled Manual|         Y|             4|     Sheri Nowmer|
+|          2|87470586299|  Whelply| Derrick| I.|  2219 Dewing Avenue|        |        |        |        Sooke|            BC|      17172| Canada|               101|211-555-7669|807-555-9033|1915-07-03|             S|  $70K - $90K|     M|             1|                   0|Partial High School|       1993-03-11|     Bronze|  Professional|         N|             3|  Derrick Whelply|
+|          3|87475757600|    Derry|  Jeanne|   |     7640 First Ave.|        |        |        |     Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|     Jeanne Derry|
+|          4|87500482201|   Spence| Michael| J.|       337 Tosca Way|        |        |        |      Burnaby|            BC|      74674| Canada|                92|929-555-7279|272-555-2844|1969-06-20|             M|  $10K - $30K|     M|             4|                   4|Partial High School|       1994-05-21|     Normal|Skilled Manual|         N|             2|   Michael Spence|
+|          5|87514054179|Gutierrez|    Maya|   |     8668 Via Neruda|        |        |        |       Novato|            CA|      57355|    USA|                42|387-555-7172|260-555-6936|1951-05-10|             S|  $30K - $50K|     F|             3|                   0|    Partial College|       1992-08-21|     Silver|        Manual|         N|             3|   Maya Gutierrez|
+|          6|87517782449|  Damstra|  Robert| F.| 1619 Stillman Court|        |        |        |     Lynnwood|            WA|      90792|    USA|                75|922-555-5465|333-555-5915|1942-10-08|             S|  $70K - $90K|     F|             3|                   0|   Bachelors Degree|       1992-04-05|     Bronze|  Professional|         Y|             3|   Robert Damstra|
+|          7|87521172800| Kanagaki| Rebecca|   |2860 D Mt. Hood C...|        |        |        |     Tlaxiaco|        Oaxaca|      13343| Mexico|                30|515-555-6247|934-555-9211|1949-03-27|             M|  $30K - $50K|     F|             2|                   1|Partial High School|       1991-05-01|     Bronze|        Manual|         Y|             3| Rebecca Kanagaki|
+|          8|87539744377|  Brunner|     Kim| H.|   6064 Brodia Court|        |        |        |   San Andres|            DF|      12942| Mexico|               106|411-555-6825|130-555-6818|1922-08-10|             M|  $50K - $70K|     M|             2|                   2|   Bachelors Degree|       1992-06-11|     Bronze|  Professional|         Y|             3|      Kim Brunner|
+|          9|87544797658| Blumberg|  Brenda| C.|    7560 Trees Drive|        |        |        |     Richmond|            BC|      17256| Canada|                90|815-555-3975|642-555-6483|1979-06-23|             M|  $10K - $30K|     M|             5|                   3|Partial High School|       1993-11-14|     Normal|Skilled Manual|         Y|             1|  Brenda Blumberg|
+|         10|87568712234|    Stanz|  Darren| M.|     1019 Kenwal Rd.|        |        |        |  Lake Oswego|            OR|      82017|    USA|                64|847-555-5443|212-555-8635|1949-08-26|             S|  $30K - $50K|     M|             4|                   0|   Bachelors Degree|       1993-05-04|     Golden|    Management|         N|             4|     Darren Stanz|
+|         11|87572821378| Murraiin|Jonathan| V.|      5423 Camby Rd.|        |        |        |      La Mesa|            CA|      35890|    USA|                11|612-555-4878|747-555-6928|1967-06-20|             S|  $50K - $70K|     M|             4|                   0| High School Degree|       1992-04-23|     Bronze|        Manual|         N|             2|Jonathan Murraiin|
+|         12|87579237222|    Creek|   Jewel| C.|    1792 Belmont Rd.|        |        |        |  Chula Vista|            CA|      40520|    USA|                13|555-555-2714|228-555-5450|1971-10-18|             S|  $30K - $50K|     F|             1|                   0| High School Degree|       1991-07-06|     Bronze|Skilled Manual|         N|             3|      Jewel Creek|
+|         13|87587122917|   Medina|   Peggy| A.|   3796 Keller Ridge|        |        |        |  Mexico City|        Mexico|      59554| Mexico|                 2|343-555-9778|785-555-2371|1975-10-12|             S|  $30K - $50K|     M|             4|                   0| High School Degree|       1990-10-09|     Bronze|        Manual|         N|             4|     Peggy Medina|
+|         14|87592626810| Rutledge|   Bryan| K.|   3074 Ardith Drive|        |        |        |Lincoln Acres|            CA|      30346|    USA|                10|659-555-3160|640-555-5439|1912-07-09|             M|  $50K - $70K|     F|             2|                   2|   Bachelors Degree|       1992-10-19|     Bronze|    Management|         Y|             2|   Bryan Rutledge|
+|         15|87597749829|Cavestany|  Walter| G.|    7987 Seawind Dr.|        |        |        |      Oak Bay|            BC|      15542| Canada|                99|471-555-8853|560-555-4646|1941-11-05|             S| $90K - $110K|     M|             3|                   0|    Graduate Degree|       1991-08-09|     Bronze|  Professional|         Y|             3| Walter Cavestany|
+|         16|87603285908|   Planck|   Peggy| M.|     4864 San Carlos|        |        |        |      Camacho|     Zacatecas|      77787| Mexico|                27|698-555-7603|986-555-9424|1919-06-02|             M|  $50K - $70K|     F|             2|                   2| High School Degree|       1993-12-17|     Bronze|Skilled Manual|         Y|             2|     Peggy Planck|
+|         17|87625473141| Marshall|  Brenda| S.|     2687 Ridge Road|        |        |        |      Arcadia|            CA|      28530|    USA|                51|771-555-6581|929-555-7260|1928-03-20|             S| $90K - $110K|     M|             3|                   0| High School Degree|       1993-10-23|     Bronze|    Management|         Y|             3|  Brenda Marshall|
+|         18|87637655735|   Wolter|  Daniel| P.|    2473 Orchard Way|        |        |        |     Altadena|            CA|      49680|    USA|                50|121-555-3960|717-555-5324|1914-09-21|             M|  $30K - $50K|     M|             3|                   2|    Partial College|       1992-10-24|     Bronze|  Professional|         Y|             4|    Daniel Wolter|
+|         19|87650814652|  Collins|  Dianne|   |      551 Rainier Dr|        |        |        |      Oakland|            CA|      21486|    USA|                37|217-555-1567|921-555-5446|1953-07-20|             S|  $70K - $90K|     F|             1|                   0| High School Degree|       1992-09-21|     Bronze|  Professional|         N|             1|   Dianne Collins|
+|         20|87653979700|    Baker| Beverly|   |591 Merriewood Drive|        |        |        |Spring Valley|            CA|      88762|    USA|                15|617-555-7972|860-555-3536|1974-04-16|             S|  $10K - $30K|     F|             2|                   0|Partial High School|       1993-04-02|     Normal|        Manual|         Y|             2|    Beverly Baker|
++-----------+-----------+---------+--------+---+--------------------+--------+--------+--------+-------------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+-----------------+
+only showing top 20 rows
+
+
+scala> val attributesDF=spark.read.format("com.databricks.spark.csv").option("delimiter", "|").load("/tmp/attribtes/customer_attr.csv")
+attributesDF: org.apache.spark.sql.DataFrame = [_c0: string, _c1: string ... 1 more field]
+
+scala> attributesDF.show
++-----------+--------------+---------------+
+|        _c0|           _c1|            _c2|
++-----------+--------------+---------------+
+|customer_id|attribute_name|attribute_value|
+|          1|            A1|             V1|
+|          1|            A2|             V2|
+|          1|            A3|             V3|
+|          2|            A1|             V1|
+|          2|            A2|             V2|
+|          2|            A3|             V3|
++-----------+--------------+---------------+
+
+
+scala> attributesDF.
+agg             createGlobalTempView      explode            isStreaming      randomSplit         sort                   toString
+alias           createOrReplaceTempView   filter             javaRDD          randomSplitAsList   sortWithinPartitions   transform
+apply           createTempView            first              join             rdd                 sparkSession           union
+as              crossJoin                 flatMap            joinWith         reduce              sqlContext             unionAll
+cache           cube                      foreach            limit            registerTempTable   stat                   unpersist
+checkpoint      describe                  foreachPartition   map              repartition         storageLevel           where
+coalesce        distinct                  groupBy            mapPartitions    rollup              take                   withColumn
+col             drop                      groupByKey         na               sample              takeAsList             withColumnRenamed
+collect         dropDuplicates            head               orderBy          schema              toDF                   withWatermark
+collectAsList   dtypes                    inputFiles         persist          select              toJSON                 write
+columns         except                    intersect          printSchema      selectExpr          toJavaRDD              writeStream
+count           explain                   isLocal            queryExecution   show                toLocalIterator
+
+scala> attributesDF.registerTempTable("customer_attribute")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala> spark.sql("select * from customer c left join customer_attribute ca on c.customer_id = ca.customer_id  ").show
+org.apache.spark.sql.AnalysisException: cannot resolve '`ca.customer_id`' given input columns: [fullname, address3, phone1, _c2, city, address4, _c0, birthdate, country, date_accnt_opened, fname, occupation, num_cars_owned, address2, customer_id, address1, customer_region_id, lname, total_children, phone2, state_province, houseowner, member_card, postal_code, _c1, marital_status, education, mi, gender, account_num, yearly_income, num_children_at_home]; line 1 pos 76;
+'Project [*]
++- 'Join LeftOuter, (customer_id#279 = 'ca.customer_id)
+   :- SubqueryAlias c
+   :  +- MetastoreRelation foodmart, customer
+   +- SubqueryAlias ca
+      +- SubqueryAlias customer_attribute
+         +- Relation[_c0#263,_c1#264,_c2#265] csv
+
+  at org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:42)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:86)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:83)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:290)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:290)
+  at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:289)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:287)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:287)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:307)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:305)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:287)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:255)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:255)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpression$1(QueryPlan.scala:266)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:277)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$6.apply(QueryPlan.scala:285)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.mapExpressions(QueryPlan.scala:285)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsUp(QueryPlan.scala:255)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:83)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:76)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:128)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$foreachUp$1.apply(TreeNode.scala:127)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$foreachUp$1.apply(TreeNode.scala:127)
+  at scala.collection.immutable.List.foreach(List.scala:381)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:127)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$class.checkAnalysis(CheckAnalysis.scala:76)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer.checkAnalysis(Analyzer.scala:57)
+  at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:52)
+  at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:63)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id ").show
+org.apache.spark.sql.catalyst.parser.ParseException:
+extraneous input 'as' expecting {<EOF>, ',', 'WHERE', 'GROUP', 'ORDER', 'HAVING', 'LIMIT', 'JOIN', 'CROSS', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'NATURAL', 'LATERAL', 'WINDOW', 'UNION', 'EXCEPT', 'MINUS', 'INTERSECT', 'SORT', 'CLUSTER', 'DISTRIBUTE', 'ANTI'}(line 1, pos 25)
+
+== SQL ==
+select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id
+-------------------------^^^
+
+  at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:197)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:99)
+  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:45)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:53)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("select * from customer   left join customer_attribute  on customer.customer_id = customer_attribute.customer_id ").show
+org.apache.spark.sql.AnalysisException: cannot resolve '`customer_attribute.customer_id`' given input columns: [lname, occupation, birthdate, fullname, _c2, _c1, _c0, phone1, fname, num_cars_owned, mi, gender, num_children_at_home, customer_id, houseowner, address1, education, yearly_income, address2, city, country, marital_status, account_num, address3, phone2, state_province, total_children, date_accnt_opened, address4, postal_code, customer_region_id, member_card]; line 1 pos 81;
+'Project [*]
++- 'Join LeftOuter, (customer_id#308 = 'customer_attribute.customer_id)
+   :- MetastoreRelation foodmart, customer
+   +- SubqueryAlias customer_attribute
+      +- Relation[_c0#263,_c1#264,_c2#265] csv
+
+  at org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:42)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:86)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1$$anonfun$apply$2.applyOrElse(CheckAnalysis.scala:83)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:290)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformUp$1.apply(TreeNode.scala:290)
+  at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:289)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:287)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$3.apply(TreeNode.scala:287)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:307)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:305)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformUp(TreeNode.scala:287)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:255)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsUp$1.apply(QueryPlan.scala:255)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpression$1(QueryPlan.scala:266)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:277)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$6.apply(QueryPlan.scala:285)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.mapExpressions(QueryPlan.scala:285)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsUp(QueryPlan.scala:255)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:83)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$$anonfun$checkAnalysis$1.apply(CheckAnalysis.scala:76)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:128)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$foreachUp$1.apply(TreeNode.scala:127)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$foreachUp$1.apply(TreeNode.scala:127)
+  at scala.collection.immutable.List.foreach(List.scala:381)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.foreachUp(TreeNode.scala:127)
+  at org.apache.spark.sql.catalyst.analysis.CheckAnalysis$class.checkAnalysis(CheckAnalysis.scala:76)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer.checkAnalysis(Analyzer.scala:57)
+  at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:52)
+  at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:63)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> val attributesDF=spark.read.format("com.databricks.spark.csv").option("header","true").option("delimiter", "|").load("/tmp/attribtes/customer_attr.csv")
+attributesDF: org.apache.spark.sql.DataFrame = [customer_id: string, attribute_name: string ... 1 more field]
+
+scala> attributesDF.show
++-----------+--------------+---------------+
+|customer_id|attribute_name|attribute_value|
++-----------+--------------+---------------+
+|          1|            A1|             V1|
+|          1|            A2|             V2|
+|          1|            A3|             V3|
+|          2|            A1|             V1|
+|          2|            A2|             V2|
+|          2|            A3|             V3|
++-----------+--------------+---------------+
+
+
+scala> attributesDF.registerTempTable("customer_attribute")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala> spark.sql("select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id ").show
+org.apache.spark.sql.catalyst.parser.ParseException:
+extraneous input 'as' expecting {<EOF>, ',', 'WHERE', 'GROUP', 'ORDER', 'HAVING', 'LIMIT', 'JOIN', 'CROSS', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'NATURAL', 'LATERAL', 'WINDOW', 'UNION', 'EXCEPT', 'MINUS', 'INTERSECT', 'SORT', 'CLUSTER', 'DISTRIBUTE', 'ANTI'}(line 1, pos 25)
+
+== SQL ==
+select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id
+-------------------------^^^
+
+  at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:197)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:99)
+  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:45)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:53)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("select * from customer c   left join customer_attribute  ca on c.customer_id = ca.customer_id ").show
++-----------+-----------+---------+--------+---+--------------------+--------+--------+--------+-------------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+-----------------+-----------+--------------+---------------+
+|customer_id|account_num|    lname|   fname| mi|            address1|address2|address3|address4|         city|state_province|postal_code|country|customer_region_id|      phone1|      phone2| birthdate|marital_status|yearly_income|gender|total_children|num_children_at_home|          education|date_accnt_opened|member_card|    occupation|houseowner|num_cars_owned|         fullname|customer_id|attribute_name|attribute_value|
++-----------+-----------+---------+--------+---+--------------------+--------+--------+--------+-------------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+-----------------+-----------+--------------+---------------+
+|          1|87462024688|   Nowmer|   Sheri| A.|    2433 Bailey Road|        |        |        |     Tlaxiaco|        Oaxaca|      15057| Mexico|                30|271-555-9715|119-555-1969|1961-08-26|             M|  $30K - $50K|     F|             4|                   2|Partial High School|       1991-09-10|     Bronze|Skilled Manual|         Y|             4|     Sheri Nowmer|          1|            A3|             V3|
+|          1|87462024688|   Nowmer|   Sheri| A.|    2433 Bailey Road|        |        |        |     Tlaxiaco|        Oaxaca|      15057| Mexico|                30|271-555-9715|119-555-1969|1961-08-26|             M|  $30K - $50K|     F|             4|                   2|Partial High School|       1991-09-10|     Bronze|Skilled Manual|         Y|             4|     Sheri Nowmer|          1|            A2|             V2|
+|          1|87462024688|   Nowmer|   Sheri| A.|    2433 Bailey Road|        |        |        |     Tlaxiaco|        Oaxaca|      15057| Mexico|                30|271-555-9715|119-555-1969|1961-08-26|             M|  $30K - $50K|     F|             4|                   2|Partial High School|       1991-09-10|     Bronze|Skilled Manual|         Y|             4|     Sheri Nowmer|          1|            A1|             V1|
+|          2|87470586299|  Whelply| Derrick| I.|  2219 Dewing Avenue|        |        |        |        Sooke|            BC|      17172| Canada|               101|211-555-7669|807-555-9033|1915-07-03|             S|  $70K - $90K|     M|             1|                   0|Partial High School|       1993-03-11|     Bronze|  Professional|         N|             3|  Derrick Whelply|          2|            A3|             V3|
+|          2|87470586299|  Whelply| Derrick| I.|  2219 Dewing Avenue|        |        |        |        Sooke|            BC|      17172| Canada|               101|211-555-7669|807-555-9033|1915-07-03|             S|  $70K - $90K|     M|             1|                   0|Partial High School|       1993-03-11|     Bronze|  Professional|         N|             3|  Derrick Whelply|          2|            A2|             V2|
+|          2|87470586299|  Whelply| Derrick| I.|  2219 Dewing Avenue|        |        |        |        Sooke|            BC|      17172| Canada|               101|211-555-7669|807-555-9033|1915-07-03|             S|  $70K - $90K|     M|             1|                   0|Partial High School|       1993-03-11|     Bronze|  Professional|         N|             3|  Derrick Whelply|          2|            A1|             V1|
+|          3|87475757600|    Derry|  Jeanne|   |     7640 First Ave.|        |        |        |     Issaquah|            WA|      73980|    USA|                21|656-555-2272|221-555-2493|1910-06-21|             M|  $50K - $70K|     F|             1|                   1|   Bachelors Degree|       1991-06-11|     Bronze|  Professional|         Y|             2|     Jeanne Derry|       null|          null|           null|
+|          4|87500482201|   Spence| Michael| J.|       337 Tosca Way|        |        |        |      Burnaby|            BC|      74674| Canada|                92|929-555-7279|272-555-2844|1969-06-20|             M|  $10K - $30K|     M|             4|                   4|Partial High School|       1994-05-21|     Normal|Skilled Manual|         N|             2|   Michael Spence|       null|          null|           null|
+|          5|87514054179|Gutierrez|    Maya|   |     8668 Via Neruda|        |        |        |       Novato|            CA|      57355|    USA|                42|387-555-7172|260-555-6936|1951-05-10|             S|  $30K - $50K|     F|             3|                   0|    Partial College|       1992-08-21|     Silver|        Manual|         N|             3|   Maya Gutierrez|       null|          null|           null|
+|          6|87517782449|  Damstra|  Robert| F.| 1619 Stillman Court|        |        |        |     Lynnwood|            WA|      90792|    USA|                75|922-555-5465|333-555-5915|1942-10-08|             S|  $70K - $90K|     F|             3|                   0|   Bachelors Degree|       1992-04-05|     Bronze|  Professional|         Y|             3|   Robert Damstra|       null|          null|           null|
+|          7|87521172800| Kanagaki| Rebecca|   |2860 D Mt. Hood C...|        |        |        |     Tlaxiaco|        Oaxaca|      13343| Mexico|                30|515-555-6247|934-555-9211|1949-03-27|             M|  $30K - $50K|     F|             2|                   1|Partial High School|       1991-05-01|     Bronze|        Manual|         Y|             3| Rebecca Kanagaki|       null|          null|           null|
+|          8|87539744377|  Brunner|     Kim| H.|   6064 Brodia Court|        |        |        |   San Andres|            DF|      12942| Mexico|               106|411-555-6825|130-555-6818|1922-08-10|             M|  $50K - $70K|     M|             2|                   2|   Bachelors Degree|       1992-06-11|     Bronze|  Professional|         Y|             3|      Kim Brunner|       null|          null|           null|
+|          9|87544797658| Blumberg|  Brenda| C.|    7560 Trees Drive|        |        |        |     Richmond|            BC|      17256| Canada|                90|815-555-3975|642-555-6483|1979-06-23|             M|  $10K - $30K|     M|             5|                   3|Partial High School|       1993-11-14|     Normal|Skilled Manual|         Y|             1|  Brenda Blumberg|       null|          null|           null|
+|         10|87568712234|    Stanz|  Darren| M.|     1019 Kenwal Rd.|        |        |        |  Lake Oswego|            OR|      82017|    USA|                64|847-555-5443|212-555-8635|1949-08-26|             S|  $30K - $50K|     M|             4|                   0|   Bachelors Degree|       1993-05-04|     Golden|    Management|         N|             4|     Darren Stanz|       null|          null|           null|
+|         11|87572821378| Murraiin|Jonathan| V.|      5423 Camby Rd.|        |        |        |      La Mesa|            CA|      35890|    USA|                11|612-555-4878|747-555-6928|1967-06-20|             S|  $50K - $70K|     M|             4|                   0| High School Degree|       1992-04-23|     Bronze|        Manual|         N|             2|Jonathan Murraiin|       null|          null|           null|
+|         12|87579237222|    Creek|   Jewel| C.|    1792 Belmont Rd.|        |        |        |  Chula Vista|            CA|      40520|    USA|                13|555-555-2714|228-555-5450|1971-10-18|             S|  $30K - $50K|     F|             1|                   0| High School Degree|       1991-07-06|     Bronze|Skilled Manual|         N|             3|      Jewel Creek|       null|          null|           null|
+|         13|87587122917|   Medina|   Peggy| A.|   3796 Keller Ridge|        |        |        |  Mexico City|        Mexico|      59554| Mexico|                 2|343-555-9778|785-555-2371|1975-10-12|             S|  $30K - $50K|     M|             4|                   0| High School Degree|       1990-10-09|     Bronze|        Manual|         N|             4|     Peggy Medina|       null|          null|           null|
+|         14|87592626810| Rutledge|   Bryan| K.|   3074 Ardith Drive|        |        |        |Lincoln Acres|            CA|      30346|    USA|                10|659-555-3160|640-555-5439|1912-07-09|             M|  $50K - $70K|     F|             2|                   2|   Bachelors Degree|       1992-10-19|     Bronze|    Management|         Y|             2|   Bryan Rutledge|       null|          null|           null|
+|         15|87597749829|Cavestany|  Walter| G.|    7987 Seawind Dr.|        |        |        |      Oak Bay|            BC|      15542| Canada|                99|471-555-8853|560-555-4646|1941-11-05|             S| $90K - $110K|     M|             3|                   0|    Graduate Degree|       1991-08-09|     Bronze|  Professional|         Y|             3| Walter Cavestany|       null|          null|           null|
+|         16|87603285908|   Planck|   Peggy| M.|     4864 San Carlos|        |        |        |      Camacho|     Zacatecas|      77787| Mexico|                27|698-555-7603|986-555-9424|1919-06-02|             M|  $50K - $70K|     F|             2|                   2| High School Degree|       1993-12-17|     Bronze|Skilled Manual|         Y|             2|     Peggy Planck|       null|          null|           null|
++-----------+-----------+---------+--------+---+--------------------+--------+--------+--------+-------------+--------------+-----------+-------+------------------+------------+------------+----------+--------------+-------------+------+--------------+--------------------+-------------------+-----------------+-----------+--------------+----------+--------------+-----------------+-----------+--------------+---------------+
+only showing top 20 rows
+
+
+scala> spark.sql("select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id ").
+agg             createGlobalTempView      explode            isStreaming      randomSplit         sort                   toString
+alias           createOrReplaceTempView   filter             javaRDD          randomSplitAsList   sortWithinPartitions   transform
+apply           createTempView            first              join             rdd                 sparkSession           union
+as              crossJoin                 flatMap            joinWith         reduce              sqlContext             unionAll
+cache           cube                      foreach            limit            registerTempTable   stat                   unpersist
+checkpoint      describe                  foreachPartition   map              repartition         storageLevel           where
+coalesce        distinct                  groupBy            mapPartitions    rollup              take                   withColumn
+col             drop                      groupByKey         na               sample              takeAsList             withColumnRenamed
+collect         dropDuplicates            head               orderBy          schema              toDF                   withWatermark
+collectAsList   dtypes                    inputFiles         persist          select              toJSON                 write
+columns         except                    intersect          printSchema      selectExpr          toJavaRDD              writeStream
+count           explain                   isLocal            queryExecution   show                toLocalIterator
+
+scala> spark.sql("select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id ").registerTempTable("customer_att")
+warning: there was one deprecation warning; re-run with -deprecation for details
+org.apache.spark.sql.catalyst.parser.ParseException:
+extraneous input 'as' expecting {<EOF>, ',', 'WHERE', 'GROUP', 'ORDER', 'HAVING', 'LIMIT', 'JOIN', 'CROSS', 'INNER', 'LEFT', 'RIGHT', 'FULL', 'NATURAL', 'LATERAL', 'WINDOW', 'UNION', 'EXCEPT', 'MINUS', 'INTERSECT', 'SORT', 'CLUSTER', 'DISTRIBUTE', 'ANTI'}(line 1, pos 25)
+
+== SQL ==
+select * from customer c as  left join customer_attribute as ca on c.customer_id = ca.customer_id
+-------------------------^^^
+
+  at org.apache.spark.sql.catalyst.parser.ParseException.withCommand(ParseDriver.scala:197)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parse(ParseDriver.scala:99)
+  at org.apache.spark.sql.execution.SparkSqlParser.parse(SparkSqlParser.scala:45)
+  at org.apache.spark.sql.catalyst.parser.AbstractSqlParser.parsePlan(ParseDriver.scala:53)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("select * from customer c   left join customer_attribute  ca on c.customer_id = ca.customer_id ").registerTempTable("customer_att")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala> spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").show
++-----------+----+----+----+----+
+|customer_id|  A1|  A2|  A3|  A4|
++-----------+----+----+----+----+
+|          1|  V1|null|null|null|
+|          1|null|  V2|null|null|
+|          1|null|null|  V3|null|
+|          2|  V1|null|null|null|
+|          2|null|  V2|null|null|
+|          2|null|null|  V3|null|
++-----------+----+----+----+----+
+
+
+scala> val attributesDF=spark.read.format("com.databricks.spark.csv").option("header","true").option("delimiter", "|").load("/tmp/attribtes/customer_attr.csv")
+attributesDF: org.apache.spark.sql.DataFrame = [customer_id: string, attribute_name: string ... 1 more field]
+
+scala> attributesDF.registerTempTable("customer_attribute")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala>  spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").show
++-----------+----+----+----+----+
+|customer_id|  A1|  A2|  A3|  A4|
++-----------+----+----+----+----+
+|          1|  V1|null|null|null|
+|          1|null|  V2|null|null|
+|          1|null|null|  V3|null|
+|          2|  V1|null|null|null|
+|          2|null|  V2|null|null|
+|          2|null|null|  V3|null|
++-----------+----+----+----+----+
+
+
+scala>  spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").show(20,false)
++-----------+----+----+----+----+
+|customer_id|A1  |A2  |A3  |A4  |
++-----------+----+----+----+----+
+|1          |V1  |null|null|null|
+|1          |null|V2  |null|null|
+|1          |null|null|V3  |null|
+|2          |V1  |null|null|null|
+|2          |null|V2  |null|null|
+|2          |null|null|V3  |null|
++-----------+----+----+----+----+
+
+
+scala>  spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").count
+res29: Long = 6
+
+scala> val attributesDF=spark.read.format("com.databricks.spark.csv").option("header","true").option("delimiter", "|").load("/tmp/attribtes/customer_attr.csv")
+attributesDF: org.apache.spark.sql.DataFrame = [customer_id: string, attribute_name: string ... 1 more field]
+
+scala> attributesDF.registerTempTable("customer_attribute")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala>  spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").count
+res31: Long = 6
+
+scala> attributesDF.count
+res32: Long = 6
+
+scala> val attributesDF=spark.read.format("com.databricks.spark.csv").option("header","true").option("delimiter", "|").load("/tmp/attribtes/customer_attr.csv")
+attributesDF: org.apache.spark.sql.DataFrame = [customer_id: string, attribute_name: string ... 1 more field]
+
+scala> attributesDF.registerTempTable("customer_attribute")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala>  spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").count
+res34: Long = 8
+
+scala>  spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ").show
++-----------+----+----+----+----+
+|customer_id|  A1|  A2|  A3|  A4|
++-----------+----+----+----+----+
+|          1|  V1|null|null|null|
+|          1|null|  V2|null|null|
+|          1|null|null|  V3|null|
+|          2|  V1|null|null|null|
+|          2|null|  V2|null|null|
+|          2|null|null|  V3|null|
+|          2|null|null|null|  V4|
+|          3|null|null|null|null|
++-----------+----+----+----+----+
+
+
+scala>  val attri_flatDF=spark.sql("SELECT customer_id,CASE WHEN attribute_name='A1' THEN attribute_value END AS A1,CASE WHEN attribute_name='A2' THEN attribute_value END AS A2,CASE WHEN attribute_name='A3' THEN attribute_value END AS A3,CASE WHEN attribute_name='A4' THEN attribute_value END AS A4 FROM customer_attribute ")
+attri_flatDF: org.apache.spark.sql.DataFrame = [customer_id: string, A1: string ... 3 more fields]
+
+scala> attri_flatDF..registerTempTable("attri_flat_table")
+<console>:1: error: identifier expected but '.' found.
+attri_flatDF..registerTempTable("attri_flat_table")
+             ^
+
+scala> attri_flatDF.registerTempTable("attri_flat_table")
+warning: there was one deprecation warning; re-run with -deprecation for details
+
+scala> spar.sql("select customer_id, first("A1") from attri_flat_table group by customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spar.sql("select customer_id, first("A1") from attri_flat_table group by customer_id").show
+                                     ^
+
+scala> spar.sql("select customer_id, first(col("A1")) from attri_flat_table group by customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spar.sql("select customer_id, first(col("A1")) from attri_flat_table group by customer_id").show
+                                         ^
+
+scala> spar.sql("select customer_id, first(col("A1"),true)  as A1 from attri_flat_table group by customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spar.sql("select customer_id, first(col("A1"),true)  as A1 from attri_flat_table group by customer_id").show
+                                         ^
+
+scala> spar.sql("select customer_id, first("A1",true)  as A1 from attri_flat_table group by customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spar.sql("select customer_id, first("A1",true)  as A1 from attri_flat_table group by customer_id").show
+                                     ^
+
+scala> spar.sql("select customer_id, first('A1',true)  as A1 from attri_flat_table group by customer_id").show
+<console>:24: error: not found: value spar
+       spar.sql("select customer_id, first('A1',true)  as A1 from attri_flat_table group by customer_id").show
+       ^
+
+scala> spark.sql("select customer_id, first('A1',true)  as A1 from attri_flat_table group by customer_id").show
++-----------+---+
+|customer_id| A1|
++-----------+---+
+|          3| A1|
+|          1| A1|
+|          2| A1|
++-----------+---+
+
+
+scala> spark.sql("select customer_id, first('A1',true)  as A1,first('A2',true) as A2 from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+---+---+
+|customer_id| A1| A2|
++-----------+---+---+
+|          1| A1| A2|
+|          2| A1| A2|
+|          3| A1| A2|
++-----------+---+---+
+
+
+scala> spark.sql("select customer_id, first('A1',true),first('A2',true)  from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+---------------+---------------+
+|customer_id|first(A1, true)|first(A2, true)|
++-----------+---------------+---------------+
+|          1|             A1|             A2|
+|          2|             A1|             A2|
+|          3|             A1|             A2|
++-----------+---------------+---------------+
+
+
+scala> spark.sql("select customer_id, collect_set('A1'),collect_set('A2')  from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+---------------+---------------+
+|customer_id|collect_set(A1)|collect_set(A2)|
++-----------+---------------+---------------+
+|          1|           [A1]|           [A2]|
+|          2|           [A1]|           [A2]|
+|          3|           [A1]|           [A2]|
++-----------+---------------+---------------+
+
+
+scala> spark.sql("select customer_id, collect_set(col('A1')),collect_set(col('A2'))  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+org.apache.spark.sql.AnalysisException: Undefined function: 'col'. This function is neither a registered temporary function nor a permanent function registered in the database 'foodmart'.; line 1 pos 32
+  at org.apache.spark.sql.catalyst.catalog.SessionCatalog.failFunctionLookup(SessionCatalog.scala:999)
+  at org.apache.spark.sql.hive.HiveSessionCatalog.lookupFunction0(HiveSessionCatalog.scala:202)
+  at org.apache.spark.sql.hive.HiveSessionCatalog.lookupFunction(HiveSessionCatalog.scala:174)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$$anonfun$apply$13$$anonfun$applyOrElse$6$$anonfun$applyOrElse$39.apply(Analyzer.scala:897)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$$anonfun$apply$13$$anonfun$applyOrElse$6$$anonfun$applyOrElse$39.apply(Analyzer.scala:897)
+  at org.apache.spark.sql.catalyst.analysis.package$.withPosition(package.scala:48)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$$anonfun$apply$13$$anonfun$applyOrElse$6.applyOrElse(Analyzer.scala:896)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$$anonfun$apply$13$$anonfun$applyOrElse$6.applyOrElse(Analyzer.scala:884)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$2.apply(TreeNode.scala:268)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$2.apply(TreeNode.scala:268)
+  at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:267)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformDown$1.apply(TreeNode.scala:273)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformDown$1.apply(TreeNode.scala:273)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4$$anonfun$apply$11.apply(TreeNode.scala:336)
+  at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+  at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+  at scala.collection.mutable.ResizableArray$class.foreach(ResizableArray.scala:59)
+  at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:48)
+  at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+  at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:334)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:305)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:273)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformDown$1.apply(TreeNode.scala:273)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$transformDown$1.apply(TreeNode.scala:273)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:307)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:305)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:273)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsDown$1.apply(QueryPlan.scala:245)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$transformExpressionsDown$1.apply(QueryPlan.scala:245)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpression$1(QueryPlan.scala:266)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:276)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1$1.apply(QueryPlan.scala:280)
+  at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+  at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+  at scala.collection.immutable.List.foreach(List.scala:381)
+  at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+  at scala.collection.immutable.List.map(List.scala:285)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.org$apache$spark$sql$catalyst$plans$QueryPlan$$recursiveTransform$1(QueryPlan.scala:280)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan$$anonfun$6.apply(QueryPlan.scala:285)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.mapExpressions(QueryPlan.scala:285)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressionsDown(QueryPlan.scala:245)
+  at org.apache.spark.sql.catalyst.plans.QueryPlan.transformExpressions(QueryPlan.scala:236)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$$anonfun$apply$13.applyOrElse(Analyzer.scala:884)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$$anonfun$apply$13.applyOrElse(Analyzer.scala:882)
+  at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan$$anonfun$resolveOperators$1.apply(LogicalPlan.scala:61)
+  at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan$$anonfun$resolveOperators$1.apply(LogicalPlan.scala:61)
+  at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:70)
+  at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperators(LogicalPlan.scala:60)
+  at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan$$anonfun$1.apply(LogicalPlan.scala:58)
+  at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan$$anonfun$1.apply(LogicalPlan.scala:58)
+  at org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:307)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:188)
+  at org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:305)
+  at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperators(LogicalPlan.scala:58)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$.apply(Analyzer.scala:882)
+  at org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveFunctions$.apply(Analyzer.scala:881)
+  at org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1$$anonfun$apply$1.apply(RuleExecutor.scala:85)
+  at org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1$$anonfun$apply$1.apply(RuleExecutor.scala:82)
+  at scala.collection.LinearSeqOptimized$class.foldLeft(LinearSeqOptimized.scala:124)
+  at scala.collection.immutable.List.foldLeft(List.scala:84)
+  at org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1.apply(RuleExecutor.scala:82)
+  at org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1.apply(RuleExecutor.scala:74)
+  at scala.collection.immutable.List.foreach(List.scala:381)
+  at org.apache.spark.sql.catalyst.rules.RuleExecutor.execute(RuleExecutor.scala:74)
+  at org.apache.spark.sql.execution.QueryExecution.analyzed$lzycompute(QueryExecution.scala:69)
+  at org.apache.spark.sql.execution.QueryExecution.analyzed(QueryExecution.scala:67)
+  at org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:50)
+  at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:63)
+  at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:592)
+  ... 48 elided
+
+scala> spark.sql("select customer_id, collect_set(col("A1")),collect_set(col("A2"))  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spark.sql("select customer_id, collect_set(col("A1")),collect_set(col("A2"))  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+                                                ^
+
+scala> spark.sql("select * from attri_flat_table ").show
++-----------+----+----+----+----+
+|customer_id|  A1|  A2|  A3|  A4|
++-----------+----+----+----+----+
+|          1|  V1|null|null|null|
+|          1|null|  V2|null|null|
+|          1|null|null|  V3|null|
+|          2|  V1|null|null|null|
+|          2|null|  V2|null|null|
+|          2|null|null|  V3|null|
+|          2|null|null|null|  V4|
+|          3|null|null|null|null|
++-----------+----+----+----+----+
+
+
+scala> spark.sql("select customer_id, collect_set("A1"),collect_set("A2)  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spark.sql("select customer_id, collect_set("A1"),collect_set("A2)  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+                                            ^
+<console>:1: error: unclosed string literal
+spark.sql("select customer_id, collect_set("A1"),collect_set("A2)  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+                                                                                                                                    ^
+
+scala> spark.sql("select customer_id, collect_set('A1'),collect_set('A2')  from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+---------------+---------------+
+|customer_id|collect_set(A1)|collect_set(A2)|
++-----------+---------------+---------------+
+|          1|           [A1]|           [A2]|
+|          2|           [A1]|           [A2]|
+|          3|           [A1]|           [A2]|
++-----------+---------------+---------------+
+
+
+scala> spark.sql("select customer_id, collect_set("A1"),collect_set("A2")  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spark.sql("select customer_id, collect_set("A1"),collect_set("A2")  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+                                            ^
+
+scala> import org.apache.spark.sql.functions.collect_set
+import org.apache.spark.sql.functions.collect_set
+
+scala> spark.sql("select customer_id, collect_set("A1"),collect_set("A2")  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+<console>:1: error: ')' expected but string literal found.
+spark.sql("select customer_id, collect_set("A1"),collect_set("A2")  from attri_flat_table group by customer_id ORDER BY  customer_id").show
+                                            ^
+
+scala> spark.sql("select customer_id, collect_set(A1),collect_set(A2)  from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+---------------+---------------+
+|customer_id|collect_set(A1)|collect_set(A2)|
++-----------+---------------+---------------+
+|          1|           [V1]|           [V2]|
+|          2|           [V1]|           [V2]|
+|          3|             []|             []|
++-----------+---------------+---------------+
+
+
+scala> spark.sql("select customer_id, collect_set(A1)[0],collect_set(A2)[0]  from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+------------------+------------------+
+|customer_id|collect_set(A1)[0]|collect_set(A2)[0]|
++-----------+------------------+------------------+
+|          1|                V1|                V2|
+|          2|                V1|                V2|
+|          3|              null|              null|
++-----------+------------------+------------------+
+
+
+scala> spark.sql("select customer_id, collect_set(A1)[0] as A1,collect_set(A2)[0]as A2  from attri_flat_table group by customer_id ORDER BY  customer_id").show
++-----------+----+----+
+|customer_id|  A1|  A2|
++-----------+----+----+
+|          1|  V1|  V2|
+|          2|  V1|  V2|
+|          3|null|null|
++-----------+----+----+
+
+
+scala>

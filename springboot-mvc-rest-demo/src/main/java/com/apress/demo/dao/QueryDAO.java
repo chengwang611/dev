@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.http.HttpHost;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -18,17 +19,29 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.ElasticsearchClient;
+import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.AbstractQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.script.ScriptType;
+import org.elasticsearch.script.mustache.SearchTemplateRequest;
+import org.elasticsearch.script.mustache.SearchTemplateRequestBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -294,14 +307,38 @@ public class QueryDAO {
 	
 	
 	
-	
-	
-	
-	
-	
 
     public void flush() throws IOException {
         String endPoint = String.join("/", props.getIndex().getName(), "_flush");
         client.getLowLevelClient().performRequest("POST", endPoint);
     }
+    
+    
+	public static SearchResponse doTemplate() {
+
+		String[] indices = { "ga_day_index-0907-2" };
+
+		RestHighLevelClient client = new RestHighLevelClient(
+				RestClient.builder(new HttpHost("192.168.0.171", 9200, "http")));
+
+		SearchTemplateRequest request = new SearchTemplateRequest();
+		request.setRequest(new SearchRequest("ga_day_index-0907-2"));
+
+		request.setScriptType(ScriptType.INLINE);
+		request.setScript("{\n" + "    \"query\": {\n" + "        \"match\" : {\n"
+				+ "            \"device.browser\" : {\n" + "                \"query\" : \"*GoogleAnalysicst*\",\n"
+				+ "                \"fuzziness\": \"AUTO\"\n" + "            }\n" + "        }\n" + "    }\n" + "}");
+
+		SearchResponse response = null;
+		try {
+			response = client.search(request.getRequest());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return response;
+
+	}
+    
 }

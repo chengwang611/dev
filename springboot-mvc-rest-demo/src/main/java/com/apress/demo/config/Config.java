@@ -19,7 +19,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
+//import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,21 +36,21 @@ public class Config {
    @Autowired
     private ConfigProps props;
 
-   // @Profile("production")
-    @Bean(destroyMethod = "close")
-    @SuppressWarnings("all")
-    public TransportClient getTransportClient() throws UnknownHostException {
-        return new PreBuiltTransportClient(Settings.EMPTY)
-                    .addTransportAddress(new TransportAddress(InetAddress.getByName(props.getClients().getHostname()),
-                            props.getClients().getTransportPort()));
-    }
-
-   // @Profile({"production", "docker"})
-    @Bean(destroyMethod = "close")
-    public RestHighLevelClient getRestClient() {
-        return new RestHighLevelClient(RestClient.builder(new HttpHost(props.getClients().getHostname(),
-                props.getClients().getHttpPort(), props.getClients().getScheme())));
-    }
+//   // @Profile("production")
+//    @Bean(destroyMethod = "close")
+//    @SuppressWarnings("all")
+//    public TransportClient getTransportClient() throws UnknownHostException {
+//        return new PreBuiltTransportClient(Settings.EMPTY)
+//                    .addTransportAddress(new TransportAddress(InetAddress.getByName(props.getClients().getHostname()),
+//                            props.getClients().getTransportPort()));
+//    }
+//
+//   // @Profile({"production", "docker"})
+//    @Bean(destroyMethod = "close")
+//    public RestHighLevelClient getRestClient() {
+//        return new RestHighLevelClient(RestClient.builder(new HttpHost(props.getClients().getHostname(),
+//                props.getClients().getHttpPort(), props.getClients().getScheme())));
+//    }
 //
 //    @Profile("test")
 //    @Bean(destroyMethod = "close")

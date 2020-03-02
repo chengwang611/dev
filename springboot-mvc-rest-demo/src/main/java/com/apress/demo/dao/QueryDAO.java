@@ -12,6 +12,8 @@ import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.http.HttpHost;
+import org.elasticsearch.action.admin.cluster.storedscripts.GetStoredScriptRequest;
+import org.elasticsearch.action.admin.cluster.storedscripts.GetStoredScriptResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
@@ -26,16 +28,20 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.AbstractQueryBuilder;
+import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.search.MatchQuery.Type;
 import org.elasticsearch.script.ScriptType;
-import org.elasticsearch.script.mustache.SearchTemplateRequest;
-import org.elasticsearch.script.mustache.SearchTemplateRequestBuilder;
+
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -310,34 +316,112 @@ public class QueryDAO {
 
     public void flush() throws IOException {
         String endPoint = String.join("/", props.getIndex().getName(), "_flush");
-        client.getLowLevelClient().performRequest("POST", endPoint);
+      //  client.getLowLevelClient().performRequest("POST", endPoint);
     }
     
     
-	public static SearchResponse doTemplate() {
+	private static QueryBuilder createQueryBuilder(String queryType) {
+
+		if ("matchQuery".equalsIgnoreCase(queryType)) {
+
+			QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("geoNetwork.networkLocation", "bell mobility inc")
+					.fuzziness(Fuzziness.AUTO).operator(Operator.AND);
+			// .prefixLength(3)
+			// .maxExpansions(10);
+			return matchQueryBuilder;
+		}else if("termQuery".equalsIgnoreCase(queryType)) {
+			QueryBuilder termQueryBuilder = QueryBuilders.termQuery("visitId", 1489028873);
+			return termQueryBuilder;
+		}
+		else if("multi_match".equalsIgnoreCase(queryType)) {
+			QueryBuilder termQueryBuilder = QueryBuilders.multiMatchQuery("beLl mobility inc", "geoNetwork.networkLocation")
+					.type(org.elasticsearch.index.query.MultiMatchQueryBuilder.Type.PHRASE).slop(1);
+					
+			return termQueryBuilder;
+		}
+		else if("wildcard".equalsIgnoreCase(queryType)) {
+			QueryBuilder termQueryBuilder = QueryBuilders.wildcardQuery( "geoNetwork.networkLocation","*ana*a");
+		
+					
+			return termQueryBuilder;
+		}
+		
+		
+		
+		return null;
+
+	}
+    
+    
+	public static int doTemplate() {
 
 		String[] indices = { "ga_day_index-0907-2" };
+		
+		RestClient restClient = RestClient.builder(new HttpHost("192.168.0.171", 9200, "http")).build();
+		
 
-		RestHighLevelClient client = new RestHighLevelClient(
-				RestClient.builder(new HttpHost("192.168.0.171", 9200, "http")));
-
-		SearchTemplateRequest request = new SearchTemplateRequest();
-		request.setRequest(new SearchRequest("ga_day_index-0907-2"));
-
-		request.setScriptType(ScriptType.INLINE);
-		request.setScript("{\n" + "    \"query\": {\n" + "        \"match\" : {\n"
-				+ "            \"device.browser\" : {\n" + "                \"query\" : \"*GoogleAnalysicst*\",\n"
-				+ "                \"fuzziness\": \"AUTO\"\n" + "            }\n" + "        }\n" + "    }\n" + "}");
-
-		SearchResponse response = null;
+		RestHighLevelClient client = new RestHighLevelClient(restClient);
+		
+		QueryBuilder queryBuilder = createQueryBuilder("wildcard");
+		
+		
+		
+		
+		String[] includeFields= {"visitId", "geoNetwork.networkLocation","device.browser"};
+		String[] excludeFields= {};
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(queryBuilder);
+		sourceBuilder.fetchSource(includeFields, excludeFields);
+		sourceBuilder.from(0);
+		sourceBuilder.size(5);
+		
+		SearchRequest searchRequest = new SearchRequest("ga_day_index-0907-2" ); 
+		searchRequest.source(sourceBuilder);
+		System.out.println("Search :"+searchRequest.toString());
+		SearchResponse searchResponse = null;
 		try {
-			response = client.search(request.getRequest());
+			searchResponse = client.search(searchRequest);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		return response;
+		finally {
+			
+		}
+		
+//		SearchTemplateRequest request = new SearchTemplateRequest();
+//		request.setRequest(new SearchRequest("ga_day_index-0907-2"));
+//
+//		request.setScriptType(ScriptType.INLINE);
+//		request.setScript("{\n" + 
+//				"    \"query\": {\n" + 
+//				"        \"match\" : {\n" + 
+//				"            \"visitId\" : {\n" + 
+//				"                \"query\" : 1489008557,\n" + 
+//				"                 \"operator\":\"AND\"\n" + 
+//				"            }\n" + 
+//				"        }\n" + 
+//				"    }\n" + 
+//				"}\n" + 
+//				"");
+//
+//		SearchResponse response = null;
+//
+//		
+//		try {
+//			response = client.search(request.getRequest());
+//		
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		searchResponse.getHits();
+		SearchHits hits = searchResponse.getHits();
+		SearchHit[] searchHits = hits.getHits();
+		for (SearchHit hit : searchHits) {
+		    System.out.println(hit.sourceAsString());
+		}
+		return  searchHits.length;
 
 	}
     

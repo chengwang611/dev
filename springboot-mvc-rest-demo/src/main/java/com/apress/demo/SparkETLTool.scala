@@ -22,7 +22,9 @@ import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{ approx_count_distinct, expr, max, min, col, collect_list, lit, map }
 import org.apache.spark.sql.functions.concat
+import org.apache.spark.sql.functions.to_json
 import java.net.URI
+import java.util.concurrent.{ ConcurrentHashMap, ConcurrentMap }
 import org.apache.hadoop.fs.{ FileSystem, Path, FileStatus, LocatedFileStatus, RemoteIterator }
 /**
  * Usage: Aggregation [partitions] [numElem] [blockSize]
@@ -35,7 +37,7 @@ object Aggregation {
 
     }
     if (path.endsWith("parquet")) {
-     return  spark.read.parquet(path)
+      return spark.read.parquet(path)
 
     }
     return null
@@ -43,49 +45,81 @@ object Aggregation {
   }
 
   def main(args: Array[String]) {
-
+    val vars = new ConcurrentHashMap[String, String]
+    args.filter(_.indexOf('=') > 0).foreach { arg =>
+      val pos = arg.indexOf('=')
+      vars.put(arg.substring(0, pos), arg.substring(pos + 1))
+    }
     // initialize spark context
     val conf = new SparkConf().setAppName("fxconduct etl tool")
     if (!conf.contains("spark.master")) conf.setMaster("local[*]")
     val spark = SparkSession.builder().config(conf).getOrCreate()
-    val path1 = "C:\\Users\\chenwang2017\\git\\Spark-The-Definitive-Guide\\data\\retail-data\\all\\2019-07-28.csv"
-    val path2 = "C:\\Users\\chenwang2017\\git\\Spark-The-Definitive-Guide\\data\\retail-data\\all\\2019-07-29.csv"
-    val keyCols = "InvoiceNo,StockCode"
-    val flatColumn = ""
-    val outputPath = "C:\\Users\\chenwang2017\\git\\Spark-The-Definitive-Guide\\data\\retail-data\\"
+    val path1 = vars.getOrDefault("path1", "C:\\Users\\chenwang2017\\git\\Spark-The-Definitive-Guide\\data\\retail-data\\all\\day1.csv")
+    val path2 = vars.getOrDefault("path2", "C:\\Users\\chenwang2017\\git\\Spark-The-Definitive-Guide\\data\\retail-data\\all\\day3.csv")
+    val keyCols = vars.getOrDefault("keyCols", "InvoiceNo,StockCode")
+    val flatColumn = vars.getOrDefault("flatColumn", "")
+    val outputPath = vars.getOrDefault("outputPath", "C:\\Users\\chenwang2017\\git\\Spark-The-Definitive-Guide\\data\\retail-data\\etl\\" + System.currentTimeMillis() + "\\")
     val keyColumns = keyCols.split(",").toSeq.map(col(_));
-    val oldDF0 = readfile(path1, spark)
-    val newDF0 = readfile(path2, spark)
-    if (!oldDF0.rdd.isEmpty() && !newDF0.rdd.isEmpty()) {
-       val oldDF = oldDF0.withColumn("uid", concat(keyColumns: _*))
-       val newDF = newDF0.withColumn("uid", concat(keyColumns: _*))
-      val deletedOrUpdate = oldDF.except(newDF);
-      val addedOrUpdate = newDF.except(oldDF);
-      val deletedOrUpdateUid = oldDF.except(newDF).select("uid")
-      val addedOrUpdateUid = newDF.except(oldDF).select("uid")
+    val oldDF = readfile(path1, spark)
+    val newDF = readfile(path2, spark)
+    if (oldDF != null && newDF != null && !oldDF.rdd.isEmpty() && !newDF.rdd.isEmpty()) {
+      var oldDF0 = oldDF.withColumn("uid", concat(keyColumns: _*)).cache()
+      var newDF0 = newDF.withColumn("uid", concat(keyColumns: _*)).cache()
+      if (!"".equalsIgnoreCase(flatColumn)) {
+        oldDF0 = oldDF0.withColumn(flatColumn + "_json", to_json(col(flatColumn))).drop(flatColumn)
+        newDF0 = newDF0.withColumn(flatColumn + "_json", to_json(col(flatColumn))).drop(flatColumn)
+      }
 
-      val updateUid = deletedOrUpdateUid.intersect(newDF.select("uid")).withColumnRenamed("uid", "uuid")
+      val deletedOrUpdateUid = oldDF0.except(newDF0).select("uid")
+      //System.out.println("deletedOrUpdate :")
+      //oldDF0.except(newDF0).show(false)
+      val addedOrUpdateUid = newDF0.except(oldDF0).select("uid")
+      //System.out.println("add OrUpdate :")
+      //newDF0.except(oldDF0).show(false)
+      //get ids for update,add and delete
+      val updateUid = deletedOrUpdateUid.intersect(addedOrUpdateUid).withColumnRenamed("uid", "uuid")
       val deletedUid = deletedOrUpdateUid.withColumnRenamed("uid", "uuid").except(updateUid)
       val addedUid = addedOrUpdateUid.withColumnRenamed("uid", "uuid").except(updateUid)
+      //fetch the raw dataframe
+      val oldDFwithUid = oldDF.withColumn("uid", concat(keyColumns: _*))
+      val newDFwithUid = newDF.withColumn("uid", concat(keyColumns: _*))
 
-      val joinExpression_del = oldDF.col("uid") === deletedUid.col("uuid")
-      val deletedDF = oldDF.join(deletedUid, joinExpression_del)
+      //deleted records in raw file
+      val deletedDF = oldDFwithUid.join(deletedUid, oldDFwithUid.col("uid") === deletedUid.col("uuid"))
+      System.out.println("deleted:")
       deletedDF.show(false)
-      deletedDF.repartition(1).write.parquet(outputPath+"deleted.parquet")
-      val joinExpression_add = newDF.col("uid") === addedUid.col("uuid")
-      val addedDF = newDF.join(addedUid, joinExpression_add)
+      deletedDF.drop("uid").drop("uuid").repartition(1).write.parquet(outputPath + "deleted.parquet")
+
+      //added records in raw
+      val addedDF = newDFwithUid.join(addedUid, newDFwithUid.col("uid") === addedUid.col("uuid"))
+      System.out.println("added:")
       addedDF.show(false)
-      addedDF.repartition(1).write.parquet(outputPath+"added.parquet")
-      val joinExpression_update_new = newDF.col("uid") === updateUid.col("uuid")
-      val updateNewDF = newDF.join(updateUid, joinExpression_update_new)
+      addedDF.drop("uid").drop("uuid").repartition(1).write.parquet(outputPath + "added.parquet")
+      //updated records in the new file
+
+      val updateNewDF = newDFwithUid.join(updateUid, newDFwithUid.col("uid") === updateUid.col("uuid"))
+      System.out.println("update as :")
       updateNewDF.show(false)
-      updateNewDF.repartition(1).write.parquet(outputPath+"updated_as.parquet")
-      val joinExpression_update_from = oldDF.col("uid") === updateUid.col("uuid")
-      val updateOldDF = oldDF.join(updateUid, joinExpression_update_from)
+      updateNewDF.drop("uid").drop("uuid").repartition(1).write.parquet(outputPath + "updated_as.parquet")
+      //updated records in the old file
+
+      val updateOldDF = oldDFwithUid.join(updateUid, oldDFwithUid.col("uid") === updateUid.col("uuid"))
+      System.out.println("updated from :")
       updateOldDF.show(false)
-      val noChange = oldDF.intersect(newDF)
-      noChange.show(false)
+
+      val noChange_left_anti = newDFwithUid.join(addedOrUpdateUid, newDFwithUid.col("uid") === addedOrUpdateUid.col("uid"), "left_anti")
+      System.out.println("left_anti -no change :")
+      noChange_left_anti.show(false)
+      System.out.println("old  =" + oldDF.count)
+      System.out.println("new  =" + newDF.count)
+      System.out.println("deleted =" + deletedDF.count)
+      System.out.println("added =" + addedDF.count)
+      System.out.println("update new =" + updateNewDF.count)
+      System.out.println("update old  =" + updateOldDF.count)
+      //      System.out.println("no change =" + noChange.count)
+      System.out.println(" left-anti-no change =" + noChange_left_anti.count)
     }
+
     spark.stop()
   }
 }
